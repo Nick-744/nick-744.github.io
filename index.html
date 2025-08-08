@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Κάπου Κάπου Τσιπουράδικο</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="index.js" defer></script>
 </head>
 
 <body>
@@ -18,62 +19,12 @@
             <div class="menu-column">
                 <div class="menu-section">
                     <h2 class="section-title">Ορεκτικά</h2>
-                    <div class="menu-item">
-                        <span class="item-name">ΠΑΤΑΤΕΣ ΤΗΓΑΝΗΤΕΣ</span>
-                        <span class="item-price">4,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΦΕΤΑ ΨΗΤΗ</span>
-                        <span class="item-price">4,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΣΑΓΑΝΑΚΙ</span>
-                        <span class="item-price">5,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΤΖΑΤΖΙΚΙ</span>
-                        <span class="item-price">4,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΤΥΡΟΚΑΥΤΕΡΗ</span>
-                        <span class="item-price">4,00 €</span>
-                    </div>
+                    <div id="orektika-items"></div>
                 </div>
                 
                 <div class="menu-section">
                     <h2 class="section-title">Σχάρας</h2>
-                    <div class="menu-item">
-                        <span class="item-name">ΦΙΛΕΤΟ ΚΟΤΟΠΟΥΛΟ</span>
-                        <span class="item-price">8,50 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΣΟΥΒΛΑΚΙ ΚΟΤΟΠΟΥΛΟ</span>
-                        <span class="item-price">2,20 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΣΟΥΒΛΑΚΙ ΧΟΙΡΙΝΟ</span>
-                        <span class="item-price">2,20 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΠΑΝΣΕΤΑ</span>
-                        <span class="item-price">8,50 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΛΟΥΚΑΝΙΚΟ ΧΩΡΙΑΤΙΚΟ ΤΕΜ.</span>
-                        <span class="item-price">2,50 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΠΟΙΚΙΛΙΑ 2 ΑΤΟΜΩΝ</span>
-                        <span class="item-price">20,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΠΟΙΚΙΛΙΑ 4 ΑΤΟΜΩΝ</span>
-                        <span class="item-price">40,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΜΠΙΦΤΕΚΙ ΜΟΣΧΑΡΙΣΙΟ</span>
-                        <span class="item-price">8,50 €</span>
-                    </div>
+                    <div id="scharas-items"></div>
                     <div class="special-note">
                         (Όλα συνοδεύονται με πατάτες τηγανητές και πιτάκια)
                     </div>
@@ -81,140 +32,19 @@
                 
                 <div class="menu-section">
                     <h2 class="section-title">Σαλάτες</h2>
-                    <div class="menu-item">
-                        <span class="item-name">ΧΩΡΙΑΤΙΚΗ</span>
-                        <span class="item-price">7,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΑΓΓΟΥΡΝΤΟΜΑΤΑ</span>
-                        <span class="item-price">4,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΝΤΑΚΟΣ</span>
-                        <span class="item-price">6,50 €</span>
-                    </div>
+                    <div id="salates-items"></div>
                 </div>
                 
                 <div class="menu-section">
                     <h2 class="section-title">Αναψυκτικά</h2>
-                    <div class="menu-item">
-                        <span class="item-name">COLA</span>
-                        <span class="item-price">2,20 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">COLA ZERO</span>
-                        <span class="item-price">2,20 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΣΠΡΑΪΤ</span>
-                        <span class="item-price">2,20 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΛΕΜΟΝΑΔΑ</span>
-                        <span class="item-price">2,20 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΠΟΡΤΟΚΑΛΛΑΔΑ</span>
-                        <span class="item-price">2,20 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΣΟΔΑ</span>
-                        <span class="item-price">2,20 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΤONIC</span>
-                        <span class="item-price">2,20 €</span>
-                    </div>
+                    <div id="anapsyktika-items"></div>
                 </div>
             </div>
             
             <div class="menu-column">
                 <div class="menu-section">
                     <h2 class="section-title">Ποτά</h2>
-                    <div class="menu-item">
-                        <span class="item-name">AMSTEL</span>
-                        <span class="item-price">3,50 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΑΛΦΑ</span>
-                        <span class="item-price">3,50 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">KAISER</span>
-                        <span class="item-price">4,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΑΛΦΑ ΑΝΕΥ</span>
-                        <span class="item-price">3,50 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΜΑΛΑΜΑΤΙΝΑ ΜΕΓΑΛΗ</span>
-                        <span class="item-price">5,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΚΡΑΣΙ ΧΥΜΑ ΛΕΥΚΟ, ΚΟΚΚΙΝΟ 1/4</span>
-                        <span class="item-price">3,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΚΡΑΣΙ ΧΥΜΑ ΛΕΥΚΟ, ΚΟΚΚΙΝΟ 1/2</span>
-                        <span class="item-price">6,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΚΡΑΣΙ ΧΥΜΑ ΛΕΥΚΟ, ΚΟΚΚΙΝΟ 1L</span>
-                        <span class="item-price">11,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΚΡΑΣΙ ΧΥΜΑ ΡΟΖΕ, ΗΜΙΓΛΥΚΟ 1/4</span>
-                        <span class="item-price">3,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΚΡΑΣΙ ΧΥΜΑ ΡΟΖΕ, ΗΜΙΓΛΥΚΟ 1/2</span>
-                        <span class="item-price">6,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΚΡΑΣΙ ΧΥΜΑ ΡΟΖΕ, ΗΜΙΓΛΥΚΟ 1L</span>
-                        <span class="item-price">11,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΤΣΙΠΟΥΡΟ ΧΥΜΑ 50 ml</span>
-                        <span class="item-price">2,20 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΤΣΙΠΟΥΡΟ ΗΔΩΝΙΚΟ 50 ml</span>
-                        <span class="item-price">3,50 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΤΣΙΠΟΥΡΟ ΜΑΚΡΗ 50 ml</span>
-                        <span class="item-price">3,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΤΣΙΠΟΥΡΟ ΖΟΙΝΟΣ 100 ml</span>
-                        <span class="item-price">6,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΤΣΙΠΟΥΡΟ ΗΔΩΝΙΚΟ 200 ml</span>
-                        <span class="item-price">12,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΟΥΖΟ ΠΛΩΜΑΡΙ 50 ml</span>
-                        <span class="item-price">3,50 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΟΥΖΟ ΠΙΛΑΒΑΣ 50 ml</span>
-                        <span class="item-price">3,50 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΟΥΖΟ ΠΙΛΑΒΑΣ 200 ml</span>
-                        <span class="item-price">12,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΠΟΤΟ ΑΠΛΟ</span>
-                        <span class="item-price">6,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">ΠΟΤΟ SPECIAL</span>
-                        <span class="item-price">7,00 €</span>
-                    </div>
+                    <div id="pota-items"></div>
                 </div>
             </div>
         </div>
@@ -222,20 +52,3 @@
 </body>
 
 </html>
-
-<script>
-    // Remove stuck hover effect on mobile after tap
-    document.addEventListener('DOMContentLoaded', function() {
-        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-            document.querySelectorAll('.menu-item').forEach(function(item) {
-                item.addEventListener('touchend', function() {
-                    // Force reflow to remove :hover
-                    this.style.pointerEvents = 'none';
-                    setTimeout(() => {
-                        this.style.pointerEvents = '';
-                    }, 50);
-                });
-            });
-        }
-    });
-</script>
