@@ -1,4 +1,3 @@
-// Enhanced menu loading with better mobile experience
 class MenuApp {
     constructor() {
         this.currentFilter = 'all';
@@ -14,7 +13,7 @@ class MenuApp {
         this.setupErrorHandling();
     }
 
-    // Function to load menu items from text file with better error handling
+    // Function to load menu items from text file with error handling
     async loadMenuSection(filename, containerId) {
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -52,7 +51,8 @@ class MenuApp {
                 }
             });
 
-        } catch (error) {
+        }
+        catch (error) {
             console.error(`Error loading ${filename}:`, error);
             container.innerHTML = `
                 <div class="menu-item error-item">
@@ -109,9 +109,11 @@ class MenuApp {
                 this.loadMenuSection('menu-anapsyktika.txt', 'anapsyktika-items'),
                 this.loadMenuSection('menu-pota.txt', 'pota-items')
             ]);
-        } catch (error) {
+        }
+        catch (error) {
             console.error('Error loading menu sections:', error);
-        } finally {
+        }
+        finally {
             this.isLoading = false;
         }
     }
@@ -154,7 +156,8 @@ class MenuApp {
                     menuSection.style.opacity = '1';
                     menuSection.style.transform = 'translateY(0)';
                 });
-            } else {
+            }
+            else {
                 menuSection.classList.add('hidden');
             }
         });
@@ -235,7 +238,8 @@ class MenuApp {
         // Add shadow to navigation when scrolled
         if (scrolled > 10) {
             nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-        } else {
+        }
+        else {
             nav.style.boxShadow = 'none';
         }
     }
@@ -248,19 +252,6 @@ class MenuApp {
         window.addEventListener('unhandledrejection', (e) => {
             console.error('Unhandled promise rejection:', e.reason);
         });
-    }
-
-    // Utility function for debouncing
-    debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
     }
 
     // Retry failed loads
