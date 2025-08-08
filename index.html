@@ -3,8 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Κάπου Κάπου Τσιπουράδικο</title>
+    <meta name="description" content="Κάπου Κάπου Τσιπουράδικο - Αυθεντικές γεύσεις, παραδοσιακά μεζεδάκια και ποτά">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="styles.css">
     <script src="index.js" defer></script>
 </head>
@@ -12,39 +15,74 @@
 <body>
     <div class="menu-container">
         <div class="menu-header">
-            <h1>ΚΑΤΑΛΟΓΟΣ</h1>
+            <div class="restaurant-logo">
+                <img src="logo_kapou_kapou.jpg" alt="Κάπου Κάπου Logo" class="logo-img">
+            </div>
+            <h1>ΚΆΠΟΥ ΚΆΠΟΥ</h1>
+            <p class="subtitle">Τσιπουράδικο</p>
+            <div class="header-divider"></div>
         </div>
         
+        <nav class="menu-navigation">
+            <button class="nav-btn active" data-section="all">Όλα</button>
+            <button class="nav-btn" data-section="orektika">Ορεκτικά</button>
+            <button class="nav-btn" data-section="scharas">Σχάρας</button>
+            <button class="nav-btn" data-section="salates">Σαλάτες</button>
+            <button class="nav-btn" data-section="pota">Ποτά</button>
+        </nav>
+        
         <div class="menu-content">
-            <div class="menu-column">
-                <div class="menu-section">
-                    <h2 class="section-title">Ορεκτικά</h2>
-                    <div id="orektika-items"></div>
-                </div>
-                
-                <div class="menu-section">
-                    <h2 class="section-title">Σχάρας</h2>
-                    <div id="scharas-items"></div>
-                    <div class="special-note">
-                        (Όλα συνοδεύονται με πατάτες τηγανητές και πιτάκια)
-                    </div>
-                </div>
-                
-                <div class="menu-section">
-                    <h2 class="section-title">Σαλάτες</h2>
-                    <div id="salates-items"></div>
-                </div>
-                
-                <div class="menu-section">
-                    <h2 class="section-title">Αναψυκτικά</h2>
-                    <div id="anapsyktika-items"></div>
+            <div class="menu-section" data-category="orektika">
+                <h2 class="section-title">
+                    <span class="title-icon">🥗</span>
+                    Ορεκτικά
+                </h2>
+                <div id="orektika-items" class="menu-items-grid"></div>
+            </div>
+            
+            <div class="menu-section" data-category="scharas">
+                <h2 class="section-title">
+                    <span class="title-icon">🔥</span>
+                    Σχάρας
+                </h2>
+                <div id="scharas-items" class="menu-items-grid"></div>
+                <div class="special-note">
+                    <span class="note-icon">ℹ️</span>
+                    Όλα συνοδεύονται με πατάτες τηγανητές και πιτάκια
                 </div>
             </div>
             
-            <div class="menu-column">
-                <div class="menu-section">
-                    <h2 class="section-title">Ποτά</h2>
-                    <div id="pota-items"></div>
+            <div class="menu-section" data-category="salates">
+                <h2 class="section-title">
+                    <span class="title-icon">🥙</span>
+                    Σαλάτες
+                </h2>
+                <div id="salates-items" class="menu-items-grid"></div>
+            </div>
+            
+            <div class="menu-section" data-category="anapsyktika">
+                <h2 class="section-title">
+                    <span class="title-icon">🥤</span>
+                    Αναψυκτικά
+                </h2>
+                <div id="anapsyktika-items" class="menu-items-grid"></div>
+            </div>
+            
+            <div class="menu-section" data-category="pota">
+                <h2 class="section-title">
+                    <span class="title-icon">🍷</span>
+                    Ποτά
+                </h2>
+                <div id="pota-items" class="menu-items-grid"></div>
+            </div>
+        </div>
+        
+        <div class="menu-footer">
+            <div class="footer-content">
+                <p class="footer-text">Καλή σας διασκέδαση!</p>
+                <div class="qr-section">
+                    <p class="qr-text">Σκανάρετε για μοίρασμα:</p>
+                    <img src="URL_QR_Code.png" alt="QR Code" class="qr-code">
                 </div>
             </div>
         </div>
