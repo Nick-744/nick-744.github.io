@@ -180,15 +180,3 @@ body {
         font-size: 1.3em;
     }
 }
-
-/* Remove hover effects on touch devices to prevent stuck state */
-@media (hover: none) and (pointer: coarse) {
-    .menu-item:hover,
-    .menu-item:active {
-        background:    none !important;
-        padding-left:  0 !important;
-        padding-right: 0 !important;
-        border-radius: 0 !important;
-        border-bottom: 1px dotted #ddd !important;
-    }
-}
