@@ -183,16 +183,6 @@ class MenuApp {
             lastTouchEnd = now;
         }, false);
 
-        // Handle orientation change
-        window.addEventListener('orientationchange', () => {
-            setTimeout(() => {
-                this.handleResize();
-            }, 100);
-        });
-
-        // Handle resize
-        window.addEventListener('resize', () => { this.handleResize(); });
-
         // Prevent context menu on long press for menu items
         document.addEventListener('contextmenu', (e) => {
             if (e.target.closest('.menu-item')) {
@@ -216,17 +206,6 @@ class MenuApp {
                 ticking = true;
             }
         }, { passive: true });
-    }
-
-    handleResize() {
-        // Recalculate navigation scroll if needed
-        const nav = document.querySelector('.menu-navigation');
-        if (nav.scrollWidth > nav.clientWidth) {
-            const activeBtn = nav.querySelector('.nav-btn.active');
-            if (activeBtn) {
-                activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center' });
-            }
-        }
     }
 
     handleScroll() {
