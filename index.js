@@ -191,9 +191,7 @@ class MenuApp {
         });
 
         // Handle resize
-        window.addEventListener('resize', this.debounce(() => {
-            this.handleResize();
-        }, 250));
+        window.addEventListener('resize', () => { this.handleResize(); });
 
         // Prevent context menu on long press for menu items
         document.addEventListener('contextmenu', (e) => {
