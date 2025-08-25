@@ -100,18 +100,77 @@ class MenuApp {
 
     async loadAllMenuSections() {
         this.isLoading = true;
-        
         try {
-            await Promise.all([
-                this.loadMenuSection('menu-orektika.txt', 'orektika-items'),
-                this.loadMenuSection('menu-scharas.txt', 'scharas-items'),
-                this.loadMenuSection('menu-salates.txt', 'salates-items'),
-                this.loadMenuSection('menu-anapsyktika.txt', 'anapsyktika-items'),
-                this.loadMenuSection('menu-pota.txt', 'pota-items')
-            ]);
+            // Try to load structured JSON first (preferred)
+            const resp = await fetch('menus.json');
+            if (resp.ok) {
+                const json = await resp.json();
+
+                // Mapping: json keys -> container IDs in the DOM
+                const mapping = {
+                    'orektika':    'orektika-items',
+                    'scharas':     'scharas-items',
+                    'salates':     'salates-items',
+                    'anapsyktika': 'anapsyktika-items',
+                    'pota':        'pota-items'
+                };
+
+                // Render each section found in JSON; leave others empty
+                Object.keys(mapping).forEach(key => {
+                    const containerId = mapping[key];
+                    const container = document.getElementById(containerId);
+                    if (!container) return;
+
+                    container.innerHTML = '';
+
+                    const section = json[key];
+                    if (!section || !Array.isArray(section.items) && !section.items) {
+                        // handle older shape where key may directly be array
+                        const maybeArray = json[key] && json[key].items ? json[key].items : (json[key] || []);
+                        if (!maybeArray || maybeArray.length === 0) {
+                            container.innerHTML = '<div class="menu-item"><span class="item-name">Δεν υπάρχουν διαθέσιμα προϊόντα</span></div>';
+                            return;
+                        }
+                    }
+
+                    const items = (section && section.items) || json[key] || [];
+                    // Save structured data for later use
+                    this.menuData[containerId] = items;
+
+                    items.forEach((it, idx) => {
+                        const name = it.name || it.item || '';
+                        const priceText = it.price_text || it.priceText || it.price || '';
+                        const menuItem = this.createMenuItem(name, priceText, idx);
+                        container.appendChild(menuItem);
+                    });
+                });
+            }
+            else {
+                // Fallback to legacy text files
+                await Promise.all([
+                    this.loadMenuSection('menu-orektika.txt',    'orektika-items'),
+                    this.loadMenuSection('menu-scharas.txt',     'scharas-items'),
+                    this.loadMenuSection('menu-salates.txt',     'salates-items'),
+                    this.loadMenuSection('menu-anapsyktika.txt', 'anapsyktika-items'),
+                    this.loadMenuSection('menu-pota.txt',        'pota-items')
+                ]);
+            }
         }
         catch (error) {
             console.error('Error loading menu sections:', error);
+            // On any error, try the legacy loaders as a safe fallback
+            try {
+                await Promise.all([
+                    this.loadMenuSection('menu-orektika.txt',    'orektika-items'),
+                    this.loadMenuSection('menu-scharas.txt',     'scharas-items'),
+                    this.loadMenuSection('menu-salates.txt',     'salates-items'),
+                    this.loadMenuSection('menu-anapsyktika.txt', 'anapsyktika-items'),
+                    this.loadMenuSection('menu-pota.txt',        'pota-items')
+                ]);
+            }
+            catch (innerErr) {
+                console.error('Fallback loaders also failed:', innerErr);
+            }
         }
         finally {
             this.isLoading = false;
