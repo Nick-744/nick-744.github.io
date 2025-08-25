@@ -11,6 +11,7 @@
       { "name": "ΤONIC",        "price": 2.2, "price_text": "2,20 €" }
     ]
   },
+
   "orektika": {
     "label": "Ορεκτικά",
     "items": [
@@ -21,6 +22,7 @@
       { "name": "ΤΥΡΟΚΑΥΤΕΡΗ",       "price": 4.0, "price_text": "4,00 €" }
     ]
   },
+
   "salates": {
     "label": "Σαλάτες",
     "items": [
@@ -29,6 +31,7 @@
       { "name": "ΝΤΑΚΟΣ",        "price": 6.5, "price_text": "6,50 €" }
     ]
   },
+
   "scharas": {
     "label": "Σχάρας",
     "items": [
@@ -42,13 +45,14 @@
       { "name": "ΜΠΙΦΤΕΚΙ ΜΟΣΧΑΡΙΣΙΟ",      "price": 8.5,  "price_text": "8,50 €"  }
     ]
   },
+  
   "pota": {
     "label": "Ποτά",
     "items": [
-      { "name": "AMSTEL",    "price": 3.5, "price_text": "3,50 €" },
-      { "name": "ΑΛΦΑ",      "price": 3.5, "price_text": "3,50 €" },
-      { "name": "KAISER",    "price": 4.0, "price_text": "4,00 €" },
-      { "name": "ΑΛΦΑ ΑΝΕΥ", "price": 3.5, "price_text": "3,50 €" },
+      { "name": "AMSTEL",                        "price": 3.5,  "price_text": "3,50 €"  },
+      { "name": "ΑΛΦΑ",                          "price": 3.5,  "price_text": "3,50 €"  },
+      { "name": "KAISER",                        "price": 4.0,  "price_text": "4,00 €"  },
+      { "name": "ΑΛΦΑ ΑΝΕΥ",                     "price": 3.5,  "price_text": "3,50 €"  },
       { "name": "ΜΑΛΑΜΑΤΙΝΑ ΜΕΓΑΛΗ",             "price": 5.0,  "price_text": "5,00 €"  },
       { "name": "ΚΡΑΣΙ ΧΥΜΑ ΛΕΥΚΟ, ΚΟΚΚΙΝΟ 1/4", "price": 3.5,  "price_text": "3,50 €"  },
       { "name": "ΚΡΑΣΙ ΧΥΜΑ ΛΕΥΚΟ, ΚΟΚΚΙΝΟ 1/2", "price": 6.0,  "price_text": "6,00 €"  },
@@ -56,16 +60,16 @@
       { "name": "ΚΡΑΣΙ ΧΥΜΑ ΡΟΖΕ, ΗΜΙΓΛΥΚΟ 1/4", "price": 3.5,  "price_text": "3,50 €"  },
       { "name": "ΚΡΑΣΙ ΧΥΜΑ ΡΟΖΕ, ΗΜΙΓΛΥΚΟ 1/2", "price": 6.0,  "price_text": "6,00 €"  },
       { "name": "ΚΡΑΣΙ ΧΥΜΑ ΡΟΖΕ, ΗΜΙΓΛΥΚΟ 1L",  "price": 11.0, "price_text": "11,00 €" },
-      { "name": "ΤΣΙΠΟΥΡΟ ΧΥΜΑ 50 ml",     "price": 2.2, "price_text": "2,20 €"   },
-      { "name": "ΤΣΙΠΟΥΡΟ ΗΔΩΝΙΚΟ 50 ml",  "price": 3.5, "price_text": "3,50 €"   },
-      { "name": "ΤΣΙΠΟΥΡΟ ΜΑΚΡΗ 50 ml",    "price": 3.0, "price_text": "3,00 €"   },
-      { "name": "ΤΣΙΠΟΥΡΟ ΖΟΙΝΟΣ 100 ml",  "price": 6.0, "price_text": "6,00 €"   },
-      { "name": "ΤΣΙΠΟΥΡΟ ΗΔΩΝΙΚΟ 200 ml", "price": 12.0, "price_text": "12,00 €" },
-      { "name": "ΟΥΖΟ ΠΛΩΜΑΡΙ 50 ml",      "price": 3.5, "price_text": "3,50 €"   },
-      { "name": "ΟΥΖΟ ΠΙΛΑΒΑΣ 50 ml",      "price": 3.5, "price_text": "3,50 €"   },
-      { "name": "ΟΥΖΟ ΠΙΛΑΒΑΣ 200 ml",     "price": 12.0, "price_text": "12,00 €" },
-      { "name": "ΠΟΤΟ ΑΠΛΟ",               "price": 6.0, "price_text": "6,00 €"   },
-      { "name": "ΠΟΤΟ SPECIAL",            "price": 7.0, "price_text": "7,00 €"   }
+      { "name": "ΤΣΙΠΟΥΡΟ ΧΥΜΑ 50 ml",           "price": 2.2,  "price_text": "2,20 €"  },
+      { "name": "ΤΣΙΠΟΥΡΟ ΗΔΩΝΙΚΟ 50 ml",        "price": 3.5,  "price_text": "3,50 €"  },
+      { "name": "ΤΣΙΠΟΥΡΟ ΜΑΚΡΗ 50 ml",          "price": 3.0,  "price_text": "3,00 €"  },
+      { "name": "ΤΣΙΠΟΥΡΟ ΖΟΙΝΟΣ 100 ml",        "price": 6.0,  "price_text": "6,00 €"  },
+      { "name": "ΤΣΙΠΟΥΡΟ ΗΔΩΝΙΚΟ 200 ml",       "price": 12.0, "price_text": "12,00 €" },
+      { "name": "ΟΥΖΟ ΠΛΩΜΑΡΙ 50 ml",            "price": 3.5,  "price_text": "3,50 €"  },
+      { "name": "ΟΥΖΟ ΠΙΛΑΒΑΣ 50 ml",            "price": 3.5,  "price_text": "3,50 €"  },
+      { "name": "ΟΥΖΟ ΠΙΛΑΒΑΣ 200 ml",           "price": 12.0, "price_text": "12,00 €" },
+      { "name": "ΠΟΤΟ ΑΠΛΟ",                     "price": 6.0,  "price_text": "6,00 €"  },
+      { "name": "ΠΟΤΟ SPECIAL",                  "price": 7.0,  "price_text": "7,00 €"  }
     ]
   }
 }
