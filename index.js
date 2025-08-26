@@ -36,7 +36,33 @@ class MenuApp {
                 }
             });
         }
-        catch (error) { console.error('Failed to load menu:', error); }
+        catch (error) { 
+            console.error('Failed to load menu:', error);
+            this.showErrorMessage();
+        }
+    }
+
+    // Show error message when menu fails to load
+    showErrorMessage() {
+        // Hide navigation
+        const navigation = document.querySelector('.menu-navigation');
+        if (navigation) { navigation.style.display = 'none'; }
+
+        // Hide all menu sections
+        document.querySelectorAll('.menu-section').forEach(section => {
+            section.style.display = 'none';
+        });
+
+        // Create and show error message
+        const menuContent = document.querySelector('.menu-content');
+        if (menuContent) {
+            menuContent.innerHTML = `
+                <div class = "error-message">
+                    <span class = "error-icon">⚠️</span>
+                    <h2>Ο κατάλογος δεν είναι διαθέσιμος...</h2>
+                </div>
+            `;
+        }
     }
 
     // Create a menu item element
@@ -44,8 +70,8 @@ class MenuApp {
         const item     = document.createElement('div');
         item.className = 'menu-item';
         item.innerHTML = `
-            <span class="item-name">${name}</span>
-            <span class="item-price">${price}</span>
+            <span class = "item-name">${name}</span>
+            <span class = "item-price">${price}</span>
         `;
         return item;
     }
