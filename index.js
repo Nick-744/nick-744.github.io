@@ -1,329 +1,80 @@
+// Simple and elegant menu application
 class MenuApp {
     constructor() {
         this.currentFilter = 'all';
-        this.menuData = {};
-        this.isLoading = false;
         this.init();
     }
 
     async init() {
-        await this.loadAllMenuSections();
+        await this.loadMenu();
         this.setupNavigation();
-        this.setupMobileEnhancements();
-        this.setupErrorHandling();
     }
 
-    // Function to load menu items from text file with error handling
-    async loadMenuSection(filename, containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-
-        // Show loading state
-        container.innerHTML = '<div class="loading">Φόρτωση...</div>';
-
+    // Load menu data from JSON
+    async loadMenu() {
         try {
-            const response = await fetch(filename);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
+            const response = await fetch('menus.json');
+            const menuData = await response.json();
             
-            const text = await response.text();
-            
-            // Split by lines and filter out empty lines
-            const lines = text.split('\n').filter(line => line.trim() !== '');
-            
-            // Clear loading state
-            container.innerHTML = '';
-            
-            if (lines.length === 0) {
-                container.innerHTML = '<div class="menu-item"><span class="item-name">Δεν υπάρχουν διαθέσιμα προϊόντα</span></div>';
-                return;
-            }
+            const sections = {
+                'orektika':    'orektika-items',
+                'scharas':     'scharas-items', 
+                'salates':     'salates-items',
+                'anapsyktika': 'anapsyktika-items',
+                'pota':        'pota-items'
+            };
 
-            // Store data for filtering
-            this.menuData[containerId] = lines;
-            
-            lines.forEach((line, index) => {
-                const [itemName, itemPrice] = line.split('|');
-                if (itemName && itemPrice) {
-                    const menuItem = this.createMenuItem(itemName.trim(), itemPrice.trim(), index);
-                    container.appendChild(menuItem);
+            Object.entries(sections).forEach(([key, containerId]) => {
+                const container = document.getElementById(containerId);
+                const section   = menuData[key];
+                
+                if (container && section?.items) {
+                    container.innerHTML = '';
+                    section.items.forEach(item => {
+                        container.appendChild(this.createMenuItem(item.name, item.price_text));
+                    });
                 }
             });
-
         }
-        catch (error) {
-            console.error(`Error loading ${filename}:`, error);
-            container.innerHTML = `
-                <div class="menu-item error-item">
-                    <span class="item-name">Σφάλμα φόρτωσης. Δοκιμάστε ξανά.</span>
-                    <button class="retry-btn" onclick="menuApp.loadMenuSection('${filename}', '${containerId}')">↻</button>
-                </div>
-            `;
-        }
+        catch (error) { console.error('Failed to load menu:', error); }
     }
 
-    createMenuItem(name, price, index) {
-        const menuItem = document.createElement('div');
-        menuItem.className = 'menu-item';
-        menuItem.style.animationDelay = `${index * 0.1}s`;
-        menuItem.innerHTML = `
+    // Create a menu item element
+    createMenuItem(name, price) {
+        const item     = document.createElement('div');
+        item.className = 'menu-item';
+        item.innerHTML = `
             <span class="item-name">${name}</span>
             <span class="item-price">${price}</span>
         `;
-        
-        // Add touch feedback
-        this.addTouchFeedback(menuItem);
-        
-        return menuItem;
+        return item;
     }
 
-    addTouchFeedback(element) {
-        let touchTimer;
-        
-        element.addEventListener('touchstart', (e) => {
-            clearTimeout(touchTimer);
-            element.style.transform = 'scale(0.98)';
-        }, { passive: true });
-
-        element.addEventListener('touchend', (e) => {
-            touchTimer = setTimeout(() => {
-                element.style.transform = '';
-            }, 150);
-        }, { passive: true });
-
-        element.addEventListener('touchcancel', (e) => {
-            clearTimeout(touchTimer);
-            element.style.transform = '';
-        }, { passive: true });
-    }
-
-    async loadAllMenuSections() {
-        this.isLoading = true;
-        try {
-            // Try to load structured JSON first (preferred)
-            const resp = await fetch('menus.json');
-            if (resp.ok) {
-                const json = await resp.json();
-
-                // Mapping: json keys -> container IDs in the DOM
-                const mapping = {
-                    'orektika':    'orektika-items',
-                    'scharas':     'scharas-items',
-                    'salates':     'salates-items',
-                    'anapsyktika': 'anapsyktika-items',
-                    'pota':        'pota-items'
-                };
-
-                // Render each section found in JSON; leave others empty
-                Object.keys(mapping).forEach(key => {
-                    const containerId = mapping[key];
-                    const container = document.getElementById(containerId);
-                    if (!container) return;
-
-                    container.innerHTML = '';
-
-                    const section = json[key];
-                    if (!section || !Array.isArray(section.items) && !section.items) {
-                        // handle older shape where key may directly be array
-                        const maybeArray = json[key] && json[key].items ? json[key].items : (json[key] || []);
-                        if (!maybeArray || maybeArray.length === 0) {
-                            container.innerHTML = '<div class="menu-item"><span class="item-name">Δεν υπάρχουν διαθέσιμα προϊόντα</span></div>';
-                            return;
-                        }
-                    }
-
-                    const items = (section && section.items) || json[key] || [];
-                    // Save structured data for later use
-                    this.menuData[containerId] = items;
-
-                    items.forEach((it, idx) => {
-                        const name = it.name || it.item || '';
-                        const priceText = it.price_text || it.priceText || it.price || '';
-                        const menuItem = this.createMenuItem(name, priceText, idx);
-                        container.appendChild(menuItem);
-                    });
-                });
-            }
-            else {
-                // Fallback to legacy text files
-                await Promise.all([
-                    this.loadMenuSection('menu-orektika.txt',    'orektika-items'),
-                    this.loadMenuSection('menu-scharas.txt',     'scharas-items'),
-                    this.loadMenuSection('menu-salates.txt',     'salates-items'),
-                    this.loadMenuSection('menu-anapsyktika.txt', 'anapsyktika-items'),
-                    this.loadMenuSection('menu-pota.txt',        'pota-items')
-                ]);
-            }
-        }
-        catch (error) {
-            console.error('Error loading menu sections:', error);
-            // On any error, try the legacy loaders as a safe fallback
-            try {
-                await Promise.all([
-                    this.loadMenuSection('menu-orektika.txt',    'orektika-items'),
-                    this.loadMenuSection('menu-scharas.txt',     'scharas-items'),
-                    this.loadMenuSection('menu-salates.txt',     'salates-items'),
-                    this.loadMenuSection('menu-anapsyktika.txt', 'anapsyktika-items'),
-                    this.loadMenuSection('menu-pota.txt',        'pota-items')
-                ]);
-            }
-            catch (innerErr) {
-                console.error('Fallback loaders also failed:', innerErr);
-            }
-        }
-        finally {
-            this.isLoading = false;
-        }
-    }
-
+    // Setup navigation buttons
     setupNavigation() {
-        const navButtons = document.querySelectorAll('.nav-btn');
-        
-        navButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
                 const section = btn.dataset.section;
                 this.filterMenu(section);
                 this.setActiveButton(btn);
-                
-                // Smooth scroll to top on mobile
-                if (window.innerWidth <= 768) {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
             });
-
-            // Add touch feedback to nav buttons
-            this.addTouchFeedback(btn);
         });
     }
 
+    // Filter menu sections
     filterMenu(section) {
-        const menuSections = document.querySelectorAll('.menu-section');
-        
-        menuSections.forEach(menuSection => {
-            const category = menuSection.dataset.category;
-            
-            if (section === 'all' || category === section) {
-                menuSection.classList.remove('hidden');
-                // Trigger animation
-                menuSection.style.opacity = '0';
-                menuSection.style.transform = 'translateY(20px)';
-                
-                requestAnimationFrame(() => {
-                    menuSection.style.transition = 'all 0.3s ease';
-                    menuSection.style.opacity = '1';
-                    menuSection.style.transform = 'translateY(0)';
-                });
-            }
-            else {
-                menuSection.classList.add('hidden');
-            }
+        document.querySelectorAll('.menu-section').forEach(menuSection => {
+            const category            = menuSection.dataset.category;
+            menuSection.style.display = (section === 'all' || category === section) ? 'block' : 'none';
         });
-
-        this.currentFilter = section;
     }
 
+    // Set active navigation button
     setActiveButton(activeBtn) {
-        document.querySelectorAll('.nav-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
         activeBtn.classList.add('active');
     }
-
-    setupMobileEnhancements() {
-        // Prevent zoom on double tap for iOS
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', (e) => {
-            const now = new Date().getTime();
-            if (now - lastTouchEnd <= 300) {
-                e.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
-
-        // Prevent context menu on long press for menu items
-        document.addEventListener('contextmenu', (e) => {
-            if (e.target.closest('.menu-item')) {
-                e.preventDefault();
-            }
-        });
-
-        // Remove hover effects on touch devices
-        if ('ontouchstart' in window) {
-            document.body.classList.add('touch-device');
-        }
-
-        // Handle scroll performance
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    this.handleScroll();
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        }, { passive: true });
-    }
-
-    handleScroll() {
-        const nav = document.querySelector('.menu-navigation');
-        const scrolled = window.pageYOffset;
-        
-        // Add shadow to navigation when scrolled
-        if (scrolled > 10) {
-            nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-        }
-        else {
-            nav.style.boxShadow = 'none';
-        }
-    }
-
-    setupErrorHandling() {
-        window.addEventListener('error', (e) => {
-            console.error('Global error:', e.error);
-        });
-
-        window.addEventListener('unhandledrejection', (e) => {
-            console.error('Unhandled promise rejection:', e.reason);
-        });
-    }
-
-    // Retry failed loads
-    async retryLoad() {
-        if (this.isLoading) return;
-        await this.loadAllMenuSections();
-    }
 }
 
-// Initialize the app when DOM is loaded
-let menuApp;
-
-document.addEventListener('DOMContentLoaded', () => {
-    menuApp = new MenuApp();
-    
-    // Add CSS animation class after load
-    setTimeout(() => {
-        document.body.classList.add('loaded');
-    }, 100);
-});
-
-// Add performance monitoring
-if ('performance' in window) {
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            const perfData = performance.timing;
-            const loadTime = perfData.loadEventEnd - perfData.navigationStart;
-            console.log('Page load time:', loadTime + 'ms');
-        }, 0);
-    });
-}
-
-// Service Worker registration for offline support (future enhancement)
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        // Future: Register service worker for offline functionality
-        console.log('Service worker support detected');
-    });
-}
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', () => { new MenuApp(); });
