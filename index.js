@@ -40,6 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         total += price;
         updateTotal();
+
+        // Scroll the receipt list to the bottom
+        receiptList.scrollTop = receiptList.scrollHeight;
     }
 
     clearBtn.addEventListener('click', () => {
